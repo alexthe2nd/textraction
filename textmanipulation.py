@@ -2,10 +2,13 @@
 #Use 'chmod +x textmanipulation.py' to give it execution privileges if double clicked in the file manager.
 
 #Import the system, regular expressions and text extraction libraries. The textract library can be installed by using 'pip install textract'. More info can be found on https://pypi.python.org/pypi/textract/
+
 import sys 
 import re 
+#Import the text extraction library.
 import textract
-import dateutil
+#import the dateutil library -- doesn't work yet. 
+#import dateutil
 
 #Reload the system library.
 reload(sys)
@@ -34,13 +37,10 @@ subst = u"\n"
 #Alter the contents of 'clean_input' by the rules of the 'sentences' (a.k.a. regular expression). 
 result = re.sub(sentences, subst, clean_input) 
 
-
-
-
-#print 'The processed text is below: \n--------------------------------------------------------------------\n'
+print 'The processed text is below: \n--------------------------------------------------------------------\n'
 
 #Print the processed text.
-#print result 
+print result 
 
 """
 The regular expression used to separate sentences is the following:
