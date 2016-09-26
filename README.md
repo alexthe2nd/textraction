@@ -1,1 +1,3 @@
 # textraction
+A text extraction and manipulation script. 
+Work in progress...
