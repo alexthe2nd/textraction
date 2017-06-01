@@ -1,40 +1,45 @@
 #!/usr/bin/env python
-#Use 'chmod +x textmanipulation.py' to give it execution privileges if double clicked in the file manager.
+# Use 'chmod +x textmanipulation.py' to give it execution privileges if 
+# double clicked in the file manager.
 
-#Import the system, regular expressions and text extraction libraries. The textract library can be installed by using 'pip install textract'. More info can be found on https://pypi.python.org/pypi/textract/
+# Import the system, regular expressions and text extraction libraries. 
+# The textract library can be installed by using 'pip install textract'. 
+# More info can be found on https://pypi.python.org/pypi/textract/
 
 import sys 
+# Import the regular expression library. 
 import re 
-#Import the text extraction library.
+# Import the text extraction library.
 import textract
-#import the dateutil library -- doesn't work yet. 
-#import dateutil
+# import the dateutil library -- broken atm. 
+# import dateutil
 
-#Reload the system library.
+# The following lines lines make the UTF-8 encoding work. 
+# Reload the system library. For some reason it doesn't work without this.
 reload(sys)
-#Set the default encoding to UTF-8.
+# Set the default encoding to UTF-8.
 sys.setdefaultencoding('utf8') 
-#The above lines are clean_input code to make the encoding work. 
 
-#Ask the user for the path to the file they want to process. 
+# Ask for the path to the file they want to process. 
 print 'Enter the name of the text file you want to process'
 
-#Get the raw keyboard input and save it in the 'filename' variable. 
+# Get the raw keyboard input and save it in the 'filename' variable. 
 filename = raw_input() 
 
-#Open the source file and extract its contents in the string named 'dirty_input'.
+# Open the source file and extract its contents in the string named 'dirty_input'.
 dirty_input = textract.process(filename) 
 
-#Turn the 'dirty_input' into 'clean_input', basically removing every bit of unnecessary space. 
+# Turn the 'dirty_input' into 'clean_input', basically removing every bit of unnecessary space. 
 clean_input = re.sub('\s+', ' ', dirty_input).strip() 
 
-#Regular expression used at splitting the source text. Detailed explanation on the bottom of the file.
+# Regular expression used at splitting the source text. Detailed explanation on the bottom of the file.
 sentences = re.compile(ur'(?u)(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', re.MULTILINE) 
 
-#Replace the whitespaces with new lines. 
+# Replace the whitespaces with new lines. 
 subst = u"\n" 
 
-#Alter the contents of 'clean_input' by the rules of the 'sentences' (a.k.a. regular expression). 
+# Alter the contents of 'clean_input' by the rules of the 'sentences' 
+# (a.k.a. regular expression). 
 result = re.sub(sentences, subst, clean_input) 
 
 print 'The processed text is below: \n--------------------------------------------------------------------\n'
